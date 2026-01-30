@@ -1,0 +1,14 @@
+C:\projects\Number Tools\bin\Debug\net9.0\Number Tools.exe
+C:\projects\Number Tools\bin\Debug\net9.0\Number Tools.deps.json
+C:\projects\Number Tools\bin\Debug\net9.0\Number Tools.runtimeconfig.json
+C:\projects\Number Tools\bin\Debug\net9.0\Number Tools.dll
+C:\projects\Number Tools\bin\Debug\net9.0\Number Tools.pdb
+C:\projects\Number Tools\obj\Debug\net9.0\Number Tools.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\Number Tools\obj\Debug\net9.0\Number Tools.AssemblyInfoInputs.cache
+C:\projects\Number Tools\obj\Debug\net9.0\Number Tools.AssemblyInfo.cs
+C:\projects\Number Tools\obj\Debug\net9.0\Number Tools.csproj.CoreCompileInputs.cache
+C:\projects\Number Tools\obj\Debug\net9.0\Number Tools.dll
+C:\projects\Number Tools\obj\Debug\net9.0\refint\Number Tools.dll
+C:\projects\Number Tools\obj\Debug\net9.0\Number Tools.pdb
+C:\projects\Number Tools\obj\Debug\net9.0\Number Tools.genruntimeconfig.cache
+C:\projects\Number Tools\obj\Debug\net9.0\ref\Number Tools.dll
