@@ -27,19 +27,11 @@ public static class Arithmetic
             Console.WriteLine($"BASE {baseInt}");
             Console.WriteLine($"First Number: {input1}");
             Console.WriteLine($"Second Number: {input2}");
+            ConsoleKeyInfo ley = GetAndPrintResult(input1, input2, baseInt, '+');
 
-            //Calculating and printing result
-            int sum = Convert.ToInt32(input1, baseInt) + Convert.ToInt32(input2, baseInt);
-            string result = Convert.ToString(sum, baseInt);
-            Console.WriteLine($"Result: {result} in base {baseInt}");
-            Console.WriteLine($"Result: {sum,10} in decimal");
-            Console.WriteLine("(Press Esc or E to exit)");
-            Console.WriteLine("(Enter B to work with a different base)");
-
-            repeated++;
-
-            //Waiting for exit input
             ConsoleKeyInfo key = Console.ReadKey();
+
+            //Geting end result
             if (key.Key == ConsoleKey.Escape || key.KeyChar == 'e' || key.KeyChar == 'E')
             {
                 break;
@@ -49,6 +41,8 @@ public static class Arithmetic
             {
                 newBase = true;
             }
+
+            repeated++;
         }
     }
 
@@ -71,5 +65,41 @@ public static class Arithmetic
         Console.Clear();
         int baseInt = Home.GetBase("DIVISION");
         Console.ReadKey();
+    }
+
+    public static ConsoleKeyInfo GetAndPrintResult(string input1, string input2, int baseInt, char operation)
+    {
+        Console.Clear();
+
+        int preResult = 0; //Temporary
+
+        //Performing operation
+        if (operation == '+')
+        {
+            preResult = Convert.ToInt32(input1, baseInt) + Convert.ToInt32(input2, baseInt);
+        }
+
+        else if (operation == '-')
+        {
+            preResult = Convert.ToInt32(input1, baseInt) - Convert.ToInt32(input2, baseInt);
+        }
+
+        else if (operation == '*')
+        {
+            preResult = Convert.ToInt32(input1, baseInt) * Convert.ToInt32(input2, baseInt);
+        }
+
+        else if (operation == '/')
+        {
+            preResult = Convert.ToInt32(input1, baseInt) / Convert.ToInt32(input2, baseInt);
+        }
+    
+        //Printing result
+        string result = Convert.ToString(preResult, baseInt);
+        Console.WriteLine($"Result: {result} in base {baseInt}");
+        Console.WriteLine($"Result: {preResult,10} in decimal");
+        Console.WriteLine("(Press Esc or E to exit)");
+        Console.WriteLine("(Enter B to work with a different base)");
+        return Console.ReadKey();
     }
 }
