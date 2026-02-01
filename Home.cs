@@ -61,7 +61,7 @@ public static class Home
             Console.WriteLine(title);
 
             //Asking for base
-            Console.WriteLine("Enter the base you want to work in (2-36): ");
+            Console.WriteLine("Enter the base you want to work in (2-10): ");
             string? baseStr = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(baseStr))
@@ -76,13 +76,48 @@ public static class Home
                 continue;
             }
 
-            if (baseInt < 2 || baseInt > 36)
+            if (baseInt < 2 || baseInt > 10)
             {
-                PrintError("Base Out of Range", "Please enter a base between 2 and 36");
+                PrintError("Base Out of Range", "Please enter a base between 2 and 10");
                 continue;
             }
 
+            Console.Clear();
             return baseInt;
+        }
+    }
+
+    public static int GetInput(int baseInt, string? input1)
+    {
+        while (true)
+        {
+            int input;
+
+            Console.Clear();
+            Console.WriteLine($"BASE {baseInt}");
+
+            if (input1 != null)
+            {
+                Console.WriteLine($"First Number: {input1}");
+            }
+            
+            Console.WriteLine("Enter your number: ");
+            string? inputStr = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(inputStr))
+            {
+                PrintError("Empty Input", "Please enter a valid number");
+                continue;
+            }
+
+            else if(!int.TryParse(inputStr, out input))
+            {
+                PrintError("Invalid Number", "Please enter a valid integer number");
+                continue;
+            }
+
+            Console.Clear();
+            return input;
         }
     }
 }
