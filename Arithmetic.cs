@@ -27,9 +27,7 @@ public static class Arithmetic
             Console.WriteLine($"BASE {baseInt}");
             Console.WriteLine($"First Number: {input1}");
             Console.WriteLine($"Second Number: {input2}");
-            ConsoleKeyInfo ley = GetAndPrintResult(input1, input2, baseInt, '+');
-
-            ConsoleKeyInfo key = Console.ReadKey();
+            ConsoleKeyInfo key = GetAndPrintResult(input1, input2, baseInt, '+');
 
             //Geting end result
             if (key.Key == ConsoleKey.Escape || key.KeyChar == 'e' || key.KeyChar == 'E')
