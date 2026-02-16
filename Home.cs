@@ -87,7 +87,7 @@ public static class Home
         }
     }
 
-    public static int GetInput(int baseInt, string? input1)
+    public static int GetInput(int baseInt, string? input1, char? symbol)
     {
         while (true)
         {
@@ -98,10 +98,14 @@ public static class Home
 
             if (input1 != null)
             {
-                Console.WriteLine($"First Number: {input1}");
+                Console.Write($"{input1} {symbol} ");
             }
             
-            Console.WriteLine("Enter your number: ");
+            else
+            {
+                Console.WriteLine("Enter your number: ");
+            }
+
             string? inputStr = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(inputStr))
