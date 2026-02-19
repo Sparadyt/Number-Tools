@@ -4,10 +4,8 @@ public static class Home
 {
     static readonly (string name, Action action)[] options =
     {
-        ("Addition", Arithmetic.Addition),
-        ("Subtraction", Arithmetic.Subtraction),
-        ("Multiplication", Arithmetic.Multiplication),
-        ("Division", Arithmetic.Division),
+        ("Arithmetic+", Arithmetic.HOME),
+        ("Change Base", Other.Changebase)
     };
 
     static void Main()
@@ -87,41 +85,54 @@ public static class Home
         }
     }
 
-    public static int GetInput(int baseInt, string? input1, char? symbol)
+    public static long ToBase10(string input, int fromBase)
     {
-        while (true)
+        long result = 0;
+
+        foreach (char c in input)
         {
-            int input;
-
-            Console.Clear();
-            Console.WriteLine($"BASE {baseInt}");
-
-            if (input1 != null)
+            if (!char.IsDigit(c))
             {
-                Console.Write($"{input1} {symbol} ");
-            }
-            
-            else
-            {
-                Console.WriteLine("Enter your number: ");
+                PrintError("Invalid input", "Please enter a number");
+                break;
             }
 
-            string? inputStr = Console.ReadLine();
+            int digitValue = c - '0';
 
-            if (string.IsNullOrWhiteSpace(inputStr))
+            if (digitValue >= fromBase)
             {
-                PrintError("Empty Input", "Please enter a valid number");
-                continue;
+                PrintError("Invalid Input", $"Unrecnogised symbol '{c}' for base {fromBase}");
+                break;
             }
 
-            else if(!int.TryParse(inputStr, out input))
-            {
-                PrintError("Invalid Number", "Please enter a valid integer number");
-                continue;
-            }
-
-            Console.Clear();
-            return input;
+            result = result * fromBase + digitValue;
         }
+
+        return result;
+    }
+
+    public static long ToBaseAny(long input, long toBase)
+    {
+        if (toBase < 2 || toBase > 10)
+        {
+            PrintError("Invalid Base", "The output base was either, less than 2 or more than 10");
+            return 0;
+        }
+
+        if (input == 0)
+        {
+            return 0;
+        }
+
+        string result = "";
+
+        while (input > 0)
+        {
+            long remainder = input % toBase;
+            result = remainder + result;
+            input /= toBase;
+        }
+
+        return Convert.ToInt64(result);
     }
 }

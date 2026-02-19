@@ -2,7 +2,53 @@ using System;
 
 public static class Arithmetic
 {
-    public static void Addition()
+    static readonly (string name, Action action)[] options =
+    {
+        ("Addition", Addition),
+        ("Subtraction", Subtraction),
+        ("Multiplication", Multiplication),
+        ("Division", Division),
+        ("Module", Module)
+    };
+    public static void HOME()
+    {
+        while(true)
+        {
+            Console.Clear();
+
+            for (int i = 0; i < options.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {options[i].name}");
+            }
+            
+            Console.WriteLine($"{options.Length + 2}. Exit");
+
+            ConsoleKeyInfo key = Console.ReadKey();
+
+            if (!Char.IsDigit(key.KeyChar))
+            {
+                Home.PrintError("Invalid Input", "Please enter a digit");
+                continue;
+            }
+
+            int inputDigit = Convert.ToInt32(key.KeyChar);
+
+            //+2 because +1 for exit, +1 becase 1 was added to `i`
+            if (inputDigit < 1 || inputDigit > options.Length + 2)
+            {
+                Home.PrintError("Input out of range", $"The input was out of range. Please enter a number from 1 to {options.Length + 2}");
+                continue;
+            }
+
+            if (inputDigit == options.Length + 2)
+            {
+                continue;
+            }
+
+            options[inputDigit].action();
+        }
+    }
+    static void Addition()
     {
         bool newBase = false;
         int repeated = 0;
@@ -20,8 +66,8 @@ public static class Arithmetic
             }
 
             //Getting both inputs
-            string input1 = Home.GetInput(baseInt, null, null).ToString();
-            string input2 = Home.GetInput(baseInt, input1, '+').ToString();
+            string input1 = GetInput(baseInt, null, null).ToString();
+            string input2 = GetInput(baseInt, input1, '+').ToString();
 
             //Printing base and inputs
             Console.WriteLine($"BASE {baseInt}");
@@ -44,7 +90,7 @@ public static class Arithmetic
         }
     }
 
-    public static void Subtraction()
+    static void Subtraction()
     {
         bool newBase = false;
         int repeated = 0;
@@ -62,8 +108,8 @@ public static class Arithmetic
             }
 
             //Getting both inputs
-            string input1 = Home.GetInput(baseInt, null, null).ToString();
-            string input2 = Home.GetInput(baseInt, input1, '-').ToString();
+            string input1 = GetInput(baseInt, null, null).ToString();
+            string input2 = GetInput(baseInt, input1, '-').ToString();
 
             //Printing base and inputs
             Console.WriteLine($"BASE {baseInt}");
@@ -86,7 +132,7 @@ public static class Arithmetic
         }
     }
 
-    public static void Multiplication()
+    static void Multiplication()
     {
         bool newBase = false;
         int repeated = 0;
@@ -104,8 +150,8 @@ public static class Arithmetic
             }
 
             //Getting both inputs
-            string input1 = Home.GetInput(baseInt, null, null).ToString();
-            string input2 = Home.GetInput(baseInt, input1, '*').ToString();
+            string input1 = GetInput(baseInt, null, null).ToString();
+            string input2 = GetInput(baseInt, input1, '*').ToString();
 
             //Printing base and inputs
             Console.WriteLine($"BASE {baseInt}");
@@ -128,7 +174,7 @@ public static class Arithmetic
         }
     }
 
-    public static void Division()
+    static void Division()
     {
         bool newBase = false;
         int repeated = 0;
@@ -146,8 +192,8 @@ public static class Arithmetic
             }
 
             //Getting both inputs
-            string input1 = Home.GetInput(baseInt, null, null).ToString();
-            string input2 = Home.GetInput(baseInt, input1, '/').ToString();
+            string input1 = GetInput(baseInt, null, null).ToString();
+            string input2 = GetInput(baseInt, input1, '/').ToString();
 
             //Printing base and inputs
             Console.WriteLine($"BASE {baseInt}");
@@ -170,7 +216,7 @@ public static class Arithmetic
         }
     }
     
-    public static void Module()
+    static void Module()
     {
         bool newBase = false;
         int repeated = 0;
@@ -188,8 +234,8 @@ public static class Arithmetic
             }
 
             //Getting both inputs
-            string input1 = Home.GetInput(baseInt, null, null).ToString();
-            string input2 = Home.GetInput(baseInt, input1, '%').ToString();
+            string input1 = GetInput(baseInt, null, null).ToString();
+            string input2 = GetInput(baseInt, input1, '%').ToString();
 
             //Printing base and inputs
             Console.WriteLine($"BASE {baseInt}");
@@ -258,5 +304,43 @@ public static class Arithmetic
         Console.WriteLine("(Press Esc or E to exit)");
         Console.WriteLine("(Enter B to work with a different base)");
         return Console.ReadKey();
+    }
+
+    public static int GetInput(int baseInt, string? input1, char? symbol)
+    {
+        while (true)
+        {
+            int input;
+
+            Console.Clear();
+            Console.WriteLine($"BASE {baseInt}");
+
+            if (input1 != null)
+            {
+                Console.Write($"{input1} {symbol} ");
+            }
+            
+            else
+            {
+                Console.WriteLine("Enter your number: ");
+            }
+
+            string? inputStr = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(inputStr))
+            {
+                Home.PrintError("Empty Input", "Please enter a valid integer");
+                continue;
+            }
+
+            else if(!int.TryParse(inputStr, out input))
+            {
+                Home.PrintError("Invalid Number", "Please enter a valid integer");
+                continue;
+            }
+
+            Console.Clear();
+            return input;
+        }
     }
 }
