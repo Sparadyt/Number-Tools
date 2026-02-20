@@ -85,11 +85,11 @@ public static class Home
         }
     }
 
-    public static long ToBase10(string input, int fromBase)
+    public static long ToBase10(long input, int fromBase)
     {
         long result = 0;
 
-        foreach (char c in input)
+        foreach (char c in input.ToString())
         {
             if (!char.IsDigit(c))
             {
@@ -114,7 +114,7 @@ public static class Home
     public static long ToAnyBase(long input, long toBase)
     {
         //Input base needs to be base 10
-        
+
         if (toBase < 2 || toBase > 10)
         {
             PrintError("Invalid Base", "The output base was either, less than 2 or more than 10");

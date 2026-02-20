@@ -66,8 +66,8 @@ public static class Arithmetic
             }
 
             //Getting both inputs
-            string input1 = GetInput(baseInt, null, null).ToString();
-            string input2 = GetInput(baseInt, input1, '+').ToString();
+            long input1 = GetInput(baseInt, null, null);
+            long input2 = GetInput(baseInt, input1, '+');
 
             //Printing base and inputs
             Console.WriteLine($"BASE {baseInt}");
@@ -108,8 +108,8 @@ public static class Arithmetic
             }
 
             //Getting both inputs
-            string input1 = GetInput(baseInt, null, null).ToString();
-            string input2 = GetInput(baseInt, input1, '-').ToString();
+            long input1 = GetInput(baseInt, null, null);
+            long input2 = GetInput(baseInt, input1, '-');
 
             //Printing base and inputs
             Console.WriteLine($"BASE {baseInt}");
@@ -150,8 +150,8 @@ public static class Arithmetic
             }
 
             //Getting both inputs
-            string input1 = GetInput(baseInt, null, null).ToString();
-            string input2 = GetInput(baseInt, input1, '*').ToString();
+            long input1 = GetInput(baseInt, null, null);
+            long input2 = GetInput(baseInt, input1, '*');
 
             //Printing base and inputs
             Console.WriteLine($"BASE {baseInt}");
@@ -192,8 +192,8 @@ public static class Arithmetic
             }
 
             //Getting both inputs
-            string input1 = GetInput(baseInt, null, null).ToString();
-            string input2 = GetInput(baseInt, input1, '/').ToString();
+            long input1 = GetInput(baseInt, null, null);
+            long input2 = GetInput(baseInt, input1, '/');
 
             //Printing base and inputs
             Console.WriteLine($"BASE {baseInt}");
@@ -234,8 +234,8 @@ public static class Arithmetic
             }
 
             //Getting both inputs
-            string input1 = GetInput(baseInt, null, null).ToString();
-            string input2 = GetInput(baseInt, input1, '%').ToString();
+            long input1 = GetInput(baseInt, null, null);
+            long input2 = GetInput(baseInt, input1, '%');
 
             //Printing base and inputs
             Console.WriteLine($"BASE {baseInt}");
@@ -258,7 +258,7 @@ public static class Arithmetic
         }
     }
 
-    public static ConsoleKeyInfo GetAndPrintResult(string input1, string input2, int baseInt, char operation)
+    public static ConsoleKeyInfo GetAndPrintResult(long input1, long input2, int baseInt, char operation)
     {
         Console.Clear();
 
@@ -308,11 +308,11 @@ public static class Arithmetic
         return Console.ReadKey();
     }
 
-    public static int GetInput(int baseInt, string? input1, char? symbol)
+    public static long GetInput(int baseInt, long? input1, char? symbol)
     {
         while (true)
         {
-            int input;
+            long input;
 
             Console.Clear();
             Console.WriteLine($"BASE {baseInt}");
@@ -335,7 +335,7 @@ public static class Arithmetic
                 continue;
             }
 
-            else if(!int.TryParse(inputStr, out input))
+            else if(!long.TryParse(inputStr, out input))
             {
                 Home.PrintError("Invalid Number", "Please enter a valid integer");
                 continue;
