@@ -111,8 +111,10 @@ public static class Home
         return result;
     }
 
-    public static long ToBaseAny(long input, long toBase)
+    public static long ToAnyBase(long input, long toBase)
     {
+        //Input base needs to be base 10
+        
         if (toBase < 2 || toBase > 10)
         {
             PrintError("Invalid Base", "The output base was either, less than 2 or more than 10");

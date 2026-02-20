@@ -15,7 +15,7 @@ public static class Other
             long result = base10;
 
             if (toBase != 10)
-                result = Home.ToBaseAny(base10, toBase);
+                result = Home.ToAnyBase(base10, toBase);
 
             else if (toBase == fromBase)
                 result = input;
@@ -23,8 +23,8 @@ public static class Other
             //Output
             Console.WriteLine($"From Base: {fromBase}");
             Console.WriteLine($"To Base: {toBase}");
-            Console.WriteLine($"Number in base {toBase}: {result}");
-            Console.WriteLine($"Number in decimal: {base10}");
+            Console.WriteLine($"Result in base {toBase}: {result}");
+            Console.WriteLine($"Result in decimal: {base10}");
             Console.ReadKey();
         }
     }

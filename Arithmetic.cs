@@ -262,37 +262,39 @@ public static class Arithmetic
     {
         Console.Clear();
 
-        int preResult = 0; //Temporary
+        long base10Input1 = Home.ToBase10(input1, baseInt);
+        long base10Input2 = Home.ToBase10(input2, baseInt); 
+        long base10Result = 0; //Temporary
 
         //Performing operation
         if (operation == '+')
         {
-            preResult = Convert.ToInt32(input1, baseInt) + Convert.ToInt32(input2, baseInt);
+            base10Result = base10Input1 + base10Input2;
         }
 
         else if (operation == '-')
         {
-            preResult = Convert.ToInt32(input1, baseInt) - Convert.ToInt32(input2, baseInt);
+            base10Result = base10Input1 - base10Input2;
         }
 
         else if (operation == '*')
         {
-            preResult = Convert.ToInt32(input1, baseInt) * Convert.ToInt32(input2, baseInt);
+            base10Result = base10Input1 * base10Input2;
         }
 
         else if (operation == '/')
         {
-            preResult = Convert.ToInt32(input1, baseInt) / Convert.ToInt32(input2, baseInt);
+            base10Result = base10Input1 / base10Input2;
         }
 
         else if (operation == '%')
         {
-            preResult = Convert.ToInt32(input1, baseInt) % Convert.ToInt32(input2, baseInt);
+            base10Result = base10Input1 % base10Input2;
         }
 
-        //Printing result
-        string result = Convert.ToString(preResult, baseInt);
+        long result = Home.ToAnyBase(base10Result, baseInt);
 
+        //Printing result
         Console.WriteLine($"BASE {baseInt}");
         Console.WriteLine($"First input: {input1}");
         Console.WriteLine($"Second input: {input2}");
@@ -300,7 +302,7 @@ public static class Arithmetic
         Console.WriteLine();
 
         Console.WriteLine($"Result: {result} in base {baseInt}");
-        Console.WriteLine($"Result: {Convert.ToInt32(result, 10)} in decimal");
+        Console.WriteLine($"Result: {base10Result} in decimal");
         Console.WriteLine("(Press Esc or E to exit)");
         Console.WriteLine("(Enter B to work with a different base)");
         return Console.ReadKey();
