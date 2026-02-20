@@ -6,6 +6,8 @@ public static class Other
     {
         while (true)
         {
+            Console.Clear();
+
             //Input Stuff
             int fromBase = Home.GetBase("CHANGE BASE: from");
             int toBase = Home.GetBase($"CHANGE BASE: to\nFrom: {fromBase}");
@@ -25,7 +27,15 @@ public static class Other
             Console.WriteLine($"To Base: {toBase}");
             Console.WriteLine($"Result in base {toBase}: {result}");
             Console.WriteLine($"Result in decimal: {base10}");
-            Console.ReadKey();
+            Console.WriteLine();
+
+            Console.WriteLine("Enter 'E' or 'Esc' to exit");
+            ConsoleKeyInfo key = Console.ReadKey();
+
+            if(key.KeyChar == 'c' || key.KeyChar == 'C' || key.Key == ConsoleKey.Escape)
+            {
+                break;
+            }
         }
     }
 }

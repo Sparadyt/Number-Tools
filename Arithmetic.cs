@@ -21,31 +21,30 @@ public static class Arithmetic
                 Console.WriteLine($"{i + 1}. {options[i].name}");
             }
             
-            Console.WriteLine($"{options.Length + 2}. Exit");
+            Console.WriteLine($"{options.Length + 1}. Exit");
 
             ConsoleKeyInfo key = Console.ReadKey();
 
-            if (!Char.IsDigit(key.KeyChar))
+            if (!int.TryParse(key.KeyChar.ToString(), out int inputDigit))
             {
                 Home.PrintError("Invalid Input", "Please enter a digit");
                 continue;
             }
 
-            int inputDigit = Convert.ToInt32(key.KeyChar);
 
             //+2 because +1 for exit, +1 becase 1 was added to `i`
-            if (inputDigit < 1 || inputDigit > options.Length + 2)
+            if (inputDigit < 1 || inputDigit > options.Length + 1)
             {
-                Home.PrintError("Input out of range", $"The input was out of range. Please enter a number from 1 to {options.Length + 2}");
+                Home.PrintError("Input out of range", $"The input was out of range. Please enter a number from 1 to {options.Length + 1}");
                 continue;
             }
 
-            if (inputDigit == options.Length + 2)
+            if (inputDigit == options.Length + 1)
             {
-                continue;
+                break;
             }
 
-            options[inputDigit].action();
+            options[inputDigit - 1].action();
         }
     }
     static void Addition()
@@ -262,6 +261,7 @@ public static class Arithmetic
     {
         Console.Clear();
 
+        bool skip = false;
         long base10Input1 = Home.ToBase10(input1, baseInt);
         long base10Input2 = Home.ToBase10(input2, baseInt); 
         long base10Result = 0; //Temporary
@@ -284,25 +284,43 @@ public static class Arithmetic
 
         else if (operation == '/')
         {
-            base10Result = base10Input1 / base10Input2;
+            if (base10Input2 == 0)
+            {
+                Home.PrintError("Division By Zero", "The second number cannot be zero in division. Please enter a valid number");
+                skip = true;
+            }
+
+            else
+                base10Result = base10Input1 / base10Input2;
         }
 
         else if (operation == '%')
         {
-            base10Result = base10Input1 % base10Input2;
+            if (base10Input2 == 0)
+            {
+                Home.PrintError("Division By Zero", "The second number cannot be zero in module. Please enter a valid number");
+                skip = true;
+            }
+            
+            else
+                base10Result = base10Input1 % base10Input2;
         }
 
         long result = Home.ToAnyBase(base10Result, baseInt);
 
         //Printing result
-        Console.WriteLine($"BASE {baseInt}");
-        Console.WriteLine($"First input: {input1}");
-        Console.WriteLine($"Second input: {input2}");
-        Console.WriteLine($"{input1} {operation} {input2}");
-        Console.WriteLine();
+        if (!skip)
+        {
+            Console.WriteLine($"BASE {baseInt}");
+            Console.WriteLine($"First input: {input1}");
+            Console.WriteLine($"Second input: {input2}");
+            Console.WriteLine($"{input1} {operation} {input2}");
+            Console.WriteLine();
 
-        Console.WriteLine($"Result: {result} in base {baseInt}");
-        Console.WriteLine($"Result: {base10Result} in decimal");
+            Console.WriteLine($"Result: {result} in base {baseInt}");
+            Console.WriteLine($"Result: {base10Result} in decimal");
+        }
+        
         Console.WriteLine("(Press Esc or E to exit)");
         Console.WriteLine("(Enter B to work with a different base)");
         return Console.ReadKey();
