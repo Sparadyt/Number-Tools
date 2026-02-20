@@ -12,3 +12,4 @@ C:\projects\Number Tools\obj\Debug\net9.0\refint\Number Tools.dll
 C:\projects\Number Tools\obj\Debug\net9.0\Number Tools.pdb
 C:\projects\Number Tools\obj\Debug\net9.0\Number Tools.genruntimeconfig.cache
 C:\projects\Number Tools\obj\Debug\net9.0\ref\Number Tools.dll
+C:\projects\Number Tools\obj\Debug\net9.0\Number Tools.sourcelink.json

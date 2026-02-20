@@ -4,10 +4,8 @@ public static class Home
 {
     static readonly (string name, Action action)[] options =
     {
-        ("Addition", Arithmetic.Addition),
-        ("Subtraction", Arithmetic.Subtraction),
-        ("Multiplication", Arithmetic.Multiplication),
-        ("Division", Arithmetic.Division),
+        ("Arithmetic+", Arithmetic.HOME),
+        ("Change Base", Other.Changebase)
     };
 
     static void Main()
@@ -61,7 +59,7 @@ public static class Home
             Console.WriteLine(title);
 
             //Asking for base
-            Console.WriteLine("Enter the base you want to work in (2-36): ");
+            Console.WriteLine("Enter the base you want to work in (2-10): ");
             string? baseStr = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(baseStr))
@@ -76,13 +74,67 @@ public static class Home
                 continue;
             }
 
-            if (baseInt < 2 || baseInt > 36)
+            if (baseInt < 2 || baseInt > 10)
             {
-                PrintError("Base Out of Range", "Please enter a base between 2 and 36");
+                PrintError("Base Out of Range", "Please enter a base between 2 and 10");
                 continue;
             }
 
+            Console.Clear();
             return baseInt;
         }
+    }
+
+    public static long ToBase10(long input, int fromBase)
+    {
+        long result = 0;
+
+        foreach (char c in input.ToString())
+        {
+            if (!char.IsDigit(c))
+            {
+                PrintError("Invalid input", "Please enter a number");
+                break;
+            }
+
+            int digitValue = c - '0';
+
+            if (digitValue >= fromBase)
+            {
+                PrintError("Invalid Input", $"Unrecnogised symbol '{c}' for base {fromBase}");
+                break;
+            }
+
+            result = result * fromBase + digitValue;
+        }
+
+        return result;
+    }
+
+    public static long ToAnyBase(long input, long toBase)
+    {
+        //Input base needs to be base 10
+
+        if (toBase < 2 || toBase > 10)
+        {
+            PrintError("Invalid Base", "The output base was either, less than 2 or more than 10");
+            return 0;
+        }
+
+        if (input == 0)
+        {
+            return 0;
+        }
+
+        string result = "";
+
+        while (input > 0)
+        {
+            long remainder = input % toBase;
+            result = remainder + result;
+            input /= toBase;
+        }
+
+        return Convert.ToInt64(result);
     }
 }
